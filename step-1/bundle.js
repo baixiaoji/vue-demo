@@ -59,9 +59,51 @@
 	(0, _bar2.default)();
 
 	var app = new _vue2.default({
-	  el: '#app',
+	  el: '#app', // 页面元素 可类和ID  但是如果类出现两次，第二次不会操作DOM上去
 	  data: {
-	    message: 'Hello Vue!'
+	    message: '你好!',
+	    text: '白小霁'
+	  }
+	});
+
+	var app2 = new _vue2.default({
+	  el: '#app-2',
+	  data: {
+	    message: '\u4F60\u5728 ' + new Date() + '\u7684\u65F6\u5019\u52A0\u8F7D\u4E86\u9875\u9762'
+	  }
+	});
+
+	var app3 = new _vue2.default({
+	  el: '#app-3',
+	  data: {
+	    seen: false
+	  }
+	});
+
+	var app4 = new _vue2.default({
+	  el: '#app-4',
+	  data: {
+	    todos: [{ text: 'Learn JavaScript' }, { text: 'Learn Vue' }, { text: 'Build something awesome' }, { text: 'vue还能for循环' }]
+	  }
+	});
+	// app4.todos.push({ text: '新的' })
+
+	var app5 = new _vue2.default({
+	  el: '#app-5',
+	  data: {
+	    message: '我爱你'
+	  },
+	  methods: {
+	    reverseMessage: function reverseMessage() {
+	      this.message = this.message.split('').reverse().join('');
+	    }
+	  }
+	});
+
+	var app6 = new _vue2.default({
+	  el: '#app-6',
+	  data: {
+	    message: '你可以在下面的input改我的值'
 	  }
 	});
 

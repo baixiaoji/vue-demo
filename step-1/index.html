@@ -1,10 +1,41 @@
-<html>
-  <head>
-    ...
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
   <body>
     <div id="app">
-      {{ message }}
+      {{ message }} {{ text}}
+    </div>
+    <div id="app-2">
+      <span v-bind:title="message"> <!--'v-'是指令的前缀-->
+        把你的鼠标浮在我上面
+      </span>
+    </div>
+    <div id="app-3">
+      <p v-if="seen">你能看见我</p>
+      <p v-else>其实你看不到我</p>
+    </div>
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <!--这里的click 处理函数要写在 methods对象中-->
+      <!--<button v-on:click="reverseMessage">Reverse Message</button>  -->
+      <button @click="reverseMessage">Reverse Message</button>  
+    </div>
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <!--v-model 是-->
+      <input v-model="message">
     </div>
     <script src="bundle.js"></script>
   </body>
