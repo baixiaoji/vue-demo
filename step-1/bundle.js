@@ -62,7 +62,34 @@
 	  el: '#app', // 页面元素 可类和ID  但是如果类出现两次，第二次不会操作DOM上去
 	  data: {
 	    message: '你好!',
-	    text: '白小霁'
+	    text: '白小霁',
+	    time: 1
+	  },
+	  /*
+	    实例的生命周期 钩子   细看 https://cn.vuejs.org/v2/guide/instance.html#生命周期图示
+	    created 在实例被创建之后被调用
+	    在要去渲染页面之前
+	    这里的 this 指向的就是调用它的Vue实例
+	   */
+	  created: function created() {
+	    //   console.log(this.message, this.text )
+	    this.message = "Hi！";
+	    this.time = new Date();
+	  },
+	  /*在要去渲染页面之前 */
+	  mounted: function mounted() {
+	    console.log("我要mounted");
+	    this.text = "zouzou";
+	    this.time = new Date() - this.time;
+	    console.log(this.time);
+	  },
+	  /*见下面的 input 部分 */
+	  updated: function updated() {
+	    console.log("我updated过");
+	  },
+	  /*未知 */
+	  destroyed: function destroyed() {
+	    console.log("我做完了");
 	  }
 	});
 
@@ -104,6 +131,10 @@
 	  el: '#app-6',
 	  data: {
 	    message: '你可以在下面的input改我的值'
+	  },
+	  /* 在数据更新的时候触发*/
+	  updated: function updated() {
+	    console.log(this.message);
 	  }
 	});
 
