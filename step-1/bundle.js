@@ -269,6 +269,21 @@
 	    }
 	  }
 	});
+	var app10 = new _vue2.default({
+	  el: '#app-10',
+	  data: {
+	    loginType: 'username'
+	  },
+	  methods: {
+	    changeLoginType: function changeLoginType() {
+	      if (this.loginType === 'username') {
+	        this.loginType = 'aa';
+	      } else {
+	        this.loginType = 'username';
+	      }
+	    }
+	  }
+	});
 
 /***/ },
 /* 1 */

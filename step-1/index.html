@@ -17,6 +17,7 @@
     </div>
     <div id="app-3">
       <p v-if="seen">你能看见我</p>
+      <!--v-else 元素要紧跟v-if/v-else-if 元素的后面，不然不会被识别出来-->
       <p v-else>其实你看不到我</p>
     </div>
     <div id="app-4">
@@ -64,6 +65,20 @@
           v-bind:class="classObject">
           你好
       </div>
+    </div>
+    <div id="app-10">
+        <div v-if="loginType ==='username' ">
+          <label>Username</label>
+          <!--如果没有加key属性的话，input是公用的-->
+          <!--<input placeholder="Enter your username" key="username-input">-->
+          <input placeholder="Enter your username">
+        </div>
+        <div v-else>
+          <label>Email</label>
+          <!--<input placeholder="Enter your email address" key="email-input">-->
+          <input placeholder="Enter your email address">
+        </div>
+        <button @click="changeLoginType">toggle</button>
     </div>
     <script src="bundle.js"></script>
   </body>

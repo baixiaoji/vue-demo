@@ -224,3 +224,19 @@ var app9 = new Vue({
         }
     }
 })
+var app10 = new Vue({
+    el: '#app-10',
+    data: {
+        loginType: 'username'
+    },
+    methods: {
+        changeLoginType: function(){
+            if(this.loginType === 'username'){
+                this.loginType = 'aa'
+            }else{
+                this.loginType = 'username'
+            }
+            
+        }
+    }
+})
