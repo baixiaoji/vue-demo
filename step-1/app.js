@@ -83,3 +83,21 @@ Vue.component('todo-item', {
 new Vue({
   el: '#app-8'
 })
+
+var data = { a: 1 }
+var vm = new Vue({
+  el: '#example',
+  data: data
+})
+console.log(`原先的a是${data.a}`)
+console.log(vm.$data === data )  // -> true
+console.log( vm.$el === document.getElementById('example') )// -> true
+data.a = 4;
+console.log(`现在的a是${vm.a}`)
+vm.a = 5;
+// $watch 是一个实例方法 没测出这个$watch什么时候调用
+vm.$watch('a', function (newVal, oldVal) {
+  // 这个回调将在 `vm.a`  改变后调用
+  console.log(newVal,oldVal)
+  console.log("我变了")
+})

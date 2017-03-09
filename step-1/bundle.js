@@ -129,6 +129,24 @@
 	  el: '#app-8'
 	});
 
+	var data = { a: 1 };
+	var vm = new _vue2.default({
+	  el: '#example',
+	  data: data
+	});
+	console.log('\u539F\u5148\u7684a\u662F' + data.a);
+	console.log(vm.$data === data); // -> true
+	console.log(vm.$el === document.getElementById('example')); // -> true
+	data.a = 4;
+	console.log('\u73B0\u5728\u7684a\u662F' + vm.a);
+	vm.a = 5;
+	// $watch 是一个实例方法 没测出这个$watch什么时候调用
+	vm.$watch('a', function (newVal, oldVal) {
+	  // 这个回调将在 `vm.a`  改变后调用
+	  console.log(newVal, oldVal);
+	  console.log("我变了");
+	});
+
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
