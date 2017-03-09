@@ -295,3 +295,27 @@ var example2 = new Vue({
     }
   }
 })
+
+// 注册
+Vue.component('my-component', {
+  template: '<div>你好咯！！</div>'
+})
+// 创建根实例
+new Vue({
+  el: '#example-6'
+})
+// 组件当中的 data 必须是函数
+var data = { counter: 0 }
+Vue.component('simple-counter', {
+  template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+  // data 是一个函数，因此 Vue 不会警告，
+  // 但是我们为每一个组件返回了同一个对象引用
+  data: function () {
+    return {
+        counter : 0
+    }
+  }
+})
+new Vue({
+  el: '#example-7'
+})
