@@ -210,3 +210,17 @@ var vm = new Vue({
 // 计算属性 默认只有 getter 如果你要在某处改变他的值的话  
 // 你需要在计算属性中给他一个 setter
 // vm.fullName = 'John Doe'
+var app9 = new Vue({
+    el: '#app-9',
+    // data: {
+    //     isActive: true,
+    //     hasError: false
+    // }
+    //改写成
+    data: {
+        classObject: {
+            active: true,
+            'text-danger': false
+        }
+    }
+})
