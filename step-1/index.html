@@ -102,6 +102,14 @@
     <div id="one">
       <span v-for="n in 10">{{ n }}</span>
     </div>
+    <div id="example-4">
+      <button v-on:click="counter += 1">增加 1</button>
+      <p>这个按钮被点击了 {{ counter }} 次。</p>
+    </div>
+    <div id="example-5">
+      <!-- `greet` 是在下面定义的方法名 -->
+      <button v-on:click="greet">Greet</button>
+    </div>
     <script src="bundle.js"></script>
   </body>
 </html>

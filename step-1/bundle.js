@@ -311,6 +311,28 @@
 	new _vue2.default({
 	  el: "#one"
 	});
+	new _vue2.default({
+	  el: '#example-4',
+	  data: {
+	    counter: 0
+	  }
+	});
+
+	var example2 = new _vue2.default({
+	  el: '#example-5',
+	  data: {
+	    name: 'Vue.js'
+	  },
+	  // 在 `methods` 对象中定义方法
+	  methods: {
+	    greet: function greet(event) {
+	      // `this` 在方法里指当前 Vue 实例
+	      alert('Hello ' + this.name + '!');
+	      // `event` 是原生 DOM 事件
+	      alert(event.target.tagName);
+	    }
+	  }
+	});
 
 /***/ },
 /* 1 */

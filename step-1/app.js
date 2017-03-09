@@ -273,3 +273,25 @@ new Vue({
 new Vue({
     el: "#one"
 })
+new Vue({
+  el: '#example-4',
+  data: {
+    counter: 0
+  }
+})
+
+var example2 = new Vue({
+  el: '#example-5',
+  data: {
+    name: 'Vue.js'
+  },
+  // 在 `methods` 对象中定义方法
+  methods: {
+    greet: function (event) {
+      // `this` 在方法里指当前 Vue 实例
+      alert('Hello ' + this.name + '!')
+      // `event` 是原生 DOM 事件
+      alert(event.target.tagName)
+    }
+  }
+})
