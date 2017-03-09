@@ -132,3 +132,81 @@ vm.$watch('a', function (newVal, oldVal) {
   console.log(newVal,oldVal)
   console.log("我变了")
 })
+var vm = new Vue({
+  el: '#example-1',
+  data: {
+    message: 'Hello'
+  },
+  //有些需要计算得出来的属性放在 computed 里面  
+  // 看 https://cn.vuejs.org/v2/guide/computed.html#基础例子
+  /*
+    computed 有缓存  而  methods里的方法会不会的调用
+   */
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return this.message.split('').reverse().join('')
+    }
+  },
+  methods: {
+      reverseMessage:function(){
+          return this.message.split('').reverse().join('')
+      }
+  }
+})
+
+// var vm = new Vue({
+//   el: '#demo',
+//   data: {
+//     firstName: 'Foo',
+//     lastName: 'Bar',
+//     fullName: 'Foo Bar'
+//   },
+//   watch: {
+//     firstName: function (val) {
+//       this.fullName = val + ' ' + this.lastName
+//     },
+//     lastName: function (val) {
+//       this.fullName = this.firstName + ' ' + val
+//     }
+//   }
+// })
+// 同样的实现  计算属性可能更好
+// var vm = new Vue({
+//   el: '#demo',
+//   data: {
+//     firstName: 'Foo',
+//     lastName: 'Bar'
+//   },
+//   computed: {
+//     fullName: function () {
+//       return this.firstName + ' ' + this.lastName
+//     }
+//   }
+// })
+
+var vm = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar'
+  },
+  computed: {
+    fullName: {
+        // getter
+        get: function () {
+            return this.firstName + ' ' + this.lastName
+        },
+        // setter
+        set: function (newValue) {
+            var names = newValue.split(' ')
+            this.firstName = names[0]
+            this.lastName = names[names.length - 1]
+        }
+    }
+ }
+})
+// 计算属性 默认只有 getter 如果你要在某处改变他的值的话  
+// 你需要在计算属性中给他一个 setter
+// vm.fullName = 'John Doe'

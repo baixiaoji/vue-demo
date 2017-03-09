@@ -27,7 +27,7 @@
       </ol>
     </div>
     <div id="app-5">
-      <p>{{ message }}</p>
+      <p v-once>{{ message }}</p>
       <!--这里的click 处理函数要写在 methods对象中-->
       <!--<button v-on:click="reverseMessage">Reverse Message</button>  -->
       <button @click="reverseMessage">Reverse Message</button>  
@@ -54,6 +54,11 @@
     <div id="example">
       {{a}}
     </div>
+    <div id="example-1">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+    <div id="demo">{{ fullName }}</div>
     <script src="bundle.js"></script>
   </body>
 </html>
