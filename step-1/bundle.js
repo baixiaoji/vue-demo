@@ -107,6 +107,28 @@
 	  }
 	});
 
+	//这里开始有点绕了 
+	// 主要作用是将父作用域的数据 传到 子作用域 那在定义组件的时候就就要让他接受一个 props 字段
+	_vue2.default.component('todo-item', {
+	  props: ['todo'],
+	  template: '<li>{{ todo.text }}</li>'
+	});
+	var app7 = new _vue2.default({
+	  el: '#app-7',
+	  data: {
+	    groceryList: [{ text: 'Vegetables' }, { text: 'Cheese' }, { text: 'Whatever else humans are supposed to eat' }]
+	  }
+	});
+
+	//  在定义完组件的时候，记得要创建 根实例
+	_vue2.default.component('todo-item', {
+	  template: '<li>This is a todo</li>'
+	});
+	// 要创建 根实例 🔥🔥
+	new _vue2.default({
+	  el: '#app-8'
+	});
+
 /***/ },
 /* 1 */
 /***/ function(module, exports) {

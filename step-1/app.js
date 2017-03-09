@@ -56,3 +56,30 @@ var app6 = new Vue({
     message: '你可以在下面的input改我的值'
   }
 })
+
+
+//这里开始有点绕了 
+// 主要作用是将父作用域的数据 传到 子作用域 那在定义组件的时候就就要让他接受一个 props 字段
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
+var app7 = new Vue({
+  el: '#app-7',
+  data: {
+    groceryList: [
+      { text: 'Vegetables' },
+      { text: 'Cheese' },
+      { text: 'Whatever else humans are supposed to eat' }
+    ]
+  }
+})
+
+//  在定义完组件的时候，记得要创建 根实例
+Vue.component('todo-item', {
+  template: '<li>This is a todo</li>'
+})
+// 要创建 根实例 🔥🔥
+new Vue({
+  el: '#app-8'
+})

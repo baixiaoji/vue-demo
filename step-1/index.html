@@ -37,6 +37,20 @@
       <!--v-model 是-->
       <input v-model="message">
     </div>
+
+    <div id="app-7">
+      <ol>
+        <!-- Now we provide each todo-item with the todo object    -->
+        <!-- it's representing, so that its content can be dynamic -->
+        <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+      </ol>
+    </div>
+    <div id="app-8">
+      <ol>
+        <!-- Create an instance of the todo-item component -->
+        <todo-item></todo-item>
+      </ol>
+    </div>
     <script src="bundle.js"></script>
   </body>
 </html>
