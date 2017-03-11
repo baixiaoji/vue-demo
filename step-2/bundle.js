@@ -64,14 +64,15 @@
 	    newTodo: '',
 	    todoList: []
 	  },
-	  created: function created() {
-	    var _this = this;
-
-	    var i = 1;
-	    setInterval(function () {
-	      _this.newTodo = i;
-	      i++;
-	    }, 1000);
+	  methods: {
+	    addTodo: function addTodo() {
+	      this.todoList.push({
+	        title: this.newTodo,
+	        createAt: new Date().toLocaleString()
+	      });
+	      console.log(this.todoList);
+	      this.newTodo = " ";
+	    }
 	  }
 	});
 
