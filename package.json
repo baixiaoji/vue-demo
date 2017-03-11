@@ -1,7 +1,6 @@
 {
   "name": "vue-demo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,10 @@
   "bugs": {
     "url": "https://github.com/baixiaoji/vue-demo/issues"
   },
-  "homepage": "https://github.com/baixiaoji/vue-demo#readme"
+  "homepage": "https://github.com/baixiaoji/vue-demo#readme",
+  "dependencies": {
+    "vue": "^2.2.2"
+  },
+  "devDependencies": {},
+  "description": ""
 }
