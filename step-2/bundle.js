@@ -68,10 +68,15 @@
 	    addTodo: function addTodo() {
 	      this.todoList.push({
 	        title: this.newTodo,
-	        createAt: new Date().toLocaleString()
+	        createAt: new Date().toLocaleString(),
+	        done: false
 	      });
-	      console.log(this.todoList);
 	      this.newTodo = " ";
+	    },
+	    removeTodo: function removeTodo(todo) {
+	      // Array.prototype.indexOf 是 ES 5 新加的 API
+	      var index = this.todoList.indexOf(todo);
+	      this.todoList.splice(index, 1);
 	    }
 	  }
 	});
