@@ -8,7 +8,12 @@
 </head>
   <body>
     <div id="app">
-      {{ message }} {{ text}}
+      <div class="newTask">
+          <input type="text" v-model="newTodo">
+      </div>
+      <ol class="todos">
+        
+      </ol>
     </div>
    
     <script src="bundle.js"></script>
