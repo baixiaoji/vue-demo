@@ -10,19 +10,20 @@ var app = new Vue({
     todoList:[]
   },
   methods:{
-    addTodo: function(){
-      this.todoList.push({
-        title: this.newTodo,
-        createAt: ( new Date() ).toLocaleString(),
-        done: false
-      })
-      this.newTodo = " ";
-    },
-    removeTodo: function(todo){
-      // Array.prototype.indexOf 是 ES 5 新加的 API
-      let index = this.todoList.indexOf( todo );
+   addTodo: function(){
+     this.todoList.push({
+       title: this.newTodo,
+       date: (new Date()).toLocaleDateString(),
+       done: false
+     })
+    //  console.log( this.todoList )
+     this.newTodo = " ";
+   },
+   removeTodo: function(todo){
+      let index = this.todoList.indexOf(todo);
       this.todoList.splice(index,1)
-    } 
+      console.log(index)
+   }
   }
 })
 
