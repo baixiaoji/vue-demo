@@ -88,7 +88,7 @@
 	      if (this.currentUser) {
 	        var query = new _leancloudStorage2.default.Query("AllTodos");
 	        query.find().then(function (todos) {
-	          var avAllTodos = todo[0];
+	          var avAllTodos = todos[0];
 	          var id = avAllTodos.id;
 	          _this.todoList = JSON.parse(avAllTodos.attributes.content);
 	          _this.todoList.id = id;
