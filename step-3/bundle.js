@@ -74,7 +74,8 @@
 	      password: ""
 	    },
 	    newTodo: '',
-	    todoList: []
+	    todoList: [],
+	    currentUser: null
 	  },
 	  created: function created() {
 	    var _this = this;
@@ -87,6 +88,8 @@
 	    var oldDataString = window.localStorage.getItem('myTodos');
 	    var oldData = JSON.parse(oldDataString);
 	    this.todoList = oldData || [];
+
+	    this.currentUser = this.getCurrentUser();
 	  },
 	  methods: {
 	    addTodo: function addTodo() {
@@ -104,19 +107,45 @@
 	      console.log(index);
 	    },
 	    signUp: function signUp() {
+	      var _this2 = this;
+
 	      var user = new _leancloudStorage2.default.User();
 	      // 设置用户名
 	      user.setUsername(this.formData.username);
 	      // 设置密码
 	      user.setPassword(this.formData.password);
 	      user.signUp().then(function (loginedUser) {
-	        console.log(loginedUser);
-	      }, function (error) {});
+	        _this2.currentUser = _this2.getCurrentUser();
+	      }, function (error) {
+	        console.log("注册失败");
+	      });
 	    },
 	    login: function login() {
+	      var _this3 = this;
+
 	      _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
-	        console.log(loginedUser);
-	      }, function (error) {});
+	        _this3.currentUser = _this3.getCurrentUser();
+	      }, function (error) {
+	        console.log("登录失败");
+	      });
+	    },
+	    getCurrentUser: function getCurrentUser() {
+	      var current = _leancloudStorage2.default.User.current();
+	      if (current) {
+	        var _AV$User$current = _leancloudStorage2.default.User.current(),
+	            id = _AV$User$current.id,
+	            createdAt = _AV$User$current.createdAt,
+	            username = _AV$User$current.attributes.username;
+
+	        return { id: id, username: username, createdAt: createdAt };
+	      } else {
+	        return null;
+	      }
+	    },
+	    logout: function logout() {
+	      _leancloudStorage2.default.User.logOut();
+	      this.currentUser = null;
+	      window.location.reload();
 	    }
 	  }
 	});

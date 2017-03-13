@@ -21,7 +21,8 @@ var app = new Vue({
       password: ""
     },
     newTodo: '',
-    todoList: []
+    todoList: [],
+    currentUser: null
   },
   created: function () {
 
@@ -33,6 +34,8 @@ var app = new Vue({
     let oldDataString = window.localStorage.getItem('myTodos')
     let oldData = JSON.parse(oldDataString)
     this.todoList = oldData || []
+
+    this.currentUser = this.getCurrentUser();
   },
   methods: {
     addTodo: function () {
@@ -55,16 +58,32 @@ var app = new Vue({
       user.setUsername(this.formData.username);
       // 设置密码
       user.setPassword(this.formData.password);
-      user.signUp().then(function (loginedUser) {
-        console.log(loginedUser);
+      user.signUp().then((loginedUser) => {
+        this.currentUser = this.getCurrentUser();
       }, function (error) {
+        console.log("注册失败")
       });
     },
     login: function () {
-      AV.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
-        console.log(loginedUser);
+      AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser) => {
+        this.currentUser = this.getCurrentUser();
       }, function (error) {
+        console.log("登录失败")
       });
+    },
+    getCurrentUser: function () {
+      let current = AV.User.current();
+      if (current) {
+        let { id, createdAt, attributes: { username } } = AV.User.current();
+        return { id, username, createdAt }
+      } else {
+        return null
+      }
+    },
+    logout: function () {
+      AV.User.logOut();
+      this.currentUser = null
+      window.location.reload()
     }
   }
 })
