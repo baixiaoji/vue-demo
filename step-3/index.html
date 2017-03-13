@@ -18,8 +18,8 @@
         <label><input type="radio" name="type" v-model="actionType" value="signUp">注册</label>
         <label><input type="radio" name="type" v-model="actionType" value="login">登入</label>
       </div>
-      <div class="signUp" v-if="actionType=='signUp' ">
-        <form @submit.prevent=signUp>
+      <div class="signUp" v-if="actionType ==='signUp' ">
+        <form @submit.prevent="signUp">
           <div class="formRow">
             用户名<input type="text" v-model="formData.username">
           </div>

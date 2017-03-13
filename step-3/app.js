@@ -8,14 +8,7 @@ AV.init({
   appId: APP_ID,
   appKey: APP_KEY
 });
-// 验证本地网络是否可以访问 LeanCloud 服务器
-var TestObject = AV.Object.extend('TestObject');
-var testObject = new TestObject();
-testObject.save({
-  words: 'Hello World!'
-}).then(function(object) {
-  alert('LeanCloud Rocks!');
-})
+
 
 
 var app = new Vue({
@@ -28,37 +21,45 @@ var app = new Vue({
       password: ""
     },
     newTodo: '',
-    todoList:[]
+    todoList: []
   },
-  created: function(){
-   
-    window.onbeforeunload  = () => {
-       let dataString = JSON.stringify(this.todoList) 
-       window.localStorage.setItem('myTodos', dataString) 
+  created: function () {
+
+    window.onbeforeunload = () => {
+      let dataString = JSON.stringify(this.todoList)
+      window.localStorage.setItem('myTodos', dataString)
     }
 
     let oldDataString = window.localStorage.getItem('myTodos')
     let oldData = JSON.parse(oldDataString)
     this.todoList = oldData || []
   },
-  methods:{
-   addTodo: function(){
-     this.todoList.push({
-       title: this.newTodo,
-       date: (new Date()).toLocaleDateString(),
-       done: false
-     })
-    //  console.log( this.todoList )
-     this.newTodo = " ";
-   },
-   removeTodo: function(todo){
+  methods: {
+    addTodo: function () {
+      this.todoList.push({
+        title: this.newTodo,
+        date: (new Date()).toLocaleDateString(),
+        done: false
+      })
+      //  console.log( this.todoList )
+      this.newTodo = " ";
+    },
+    removeTodo: function (todo) {
       let index = this.todoList.indexOf(todo);
-      this.todoList.splice(index,1)
+      this.todoList.splice(index, 1)
       console.log(index)
-   }
-  },
-  signUp: function(){
-    console.log("666")
+    },
+    signUp: function () {
+      var user = new AV.User();
+      // 设置用户名
+      user.setUsername(this.formData.username);
+      // 设置密码
+      user.setPassword(this.formData.password);
+      user.signUp().then(function (loginedUser) {
+        console.log(loginedUser);
+      }, function (error) {
+      });
+    }
   }
 })
 
