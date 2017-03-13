@@ -64,6 +64,18 @@
 	    newTodo: '',
 	    todoList: []
 	  },
+	  created: function created() {
+	    var _this = this;
+
+	    window.onbeforeunload = function () {
+	      var dataString = JSON.stringify(_this.todoList);
+	      window.localStorage.setItem('myTodos', dataString);
+	    };
+
+	    var oldDataString = window.localStorage.getItem('myTodos');
+	    var oldData = JSON.parse(oldDataString);
+	    this.todoList = oldData || [];
+	  },
 	  methods: {
 	    addTodo: function addTodo() {
 	      this.todoList.push({
