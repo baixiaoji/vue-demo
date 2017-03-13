@@ -78,20 +78,35 @@
 	    currentUser: null
 	  },
 	  created: function created() {
-	    var _this = this;
-
-	    window.onbeforeunload = function () {
-	      var dataString = JSON.stringify(_this.todoList);
-	      window.localStorage.setItem('myTodos', dataString);
-	    };
-
-	    var oldDataString = window.localStorage.getItem('myTodos');
-	    var oldData = JSON.parse(oldDataString);
-	    this.todoList = oldData || [];
-
 	    this.currentUser = this.getCurrentUser();
+	    if (this.currentUser) {
+	      var query = new _leancloudStorage2.default.Query("AllTodos");
+	      query.find().then(function (todos) {
+	        console.log(todos);
+	      }, function (err) {
+	        console.log(err);
+	      });
+	    }
 	  },
 	  methods: {
+	    saveTodos: function saveTodos() {
+	      var dataString = JSON.stringify(this.todoList);
+	      var AVTodos = _leancloudStorage2.default.Object.extend('AllTodos');
+	      var avTodos = new AVTodos();
+	      var acl = new _leancloudStorage2.default.ACL();
+	      acl.setPublicReadAccess(true);
+	      acl.setWriteAccess(_leancloudStorage2.default.User.current(), true);
+
+	      avTodos.set('content', dataString);
+	      avTodos.setACL(acl); // 设置访问控制
+	      avTodos.save().then(function (todo) {
+	        // 成功保存之后，执行其他逻辑.
+	        console.log("保存成功");
+	      }, function (error) {
+	        // 异常处理
+	        console.error("保存失败");
+	      });
+	    },
 	    addTodo: function addTodo() {
 	      this.todoList.push({
 	        title: this.newTodo,
@@ -100,14 +115,16 @@
 	      });
 	      //  console.log( this.todoList )
 	      this.newTodo = " ";
+	      this.saveTodos();
 	    },
 	    removeTodo: function removeTodo(todo) {
 	      var index = this.todoList.indexOf(todo);
 	      this.todoList.splice(index, 1);
 	      console.log(index);
+	      this.saveTodos();
 	    },
 	    signUp: function signUp() {
-	      var _this2 = this;
+	      var _this = this;
 
 	      var user = new _leancloudStorage2.default.User();
 	      // 设置用户名
@@ -115,16 +132,16 @@
 	      // 设置密码
 	      user.setPassword(this.formData.password);
 	      user.signUp().then(function (loginedUser) {
-	        _this2.currentUser = _this2.getCurrentUser();
+	        _this.currentUser = _this.getCurrentUser();
 	      }, function (error) {
 	        console.log("注册失败");
 	      });
 	    },
 	    login: function login() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
-	        _this3.currentUser = _this3.getCurrentUser();
+	        _this2.currentUser = _this2.getCurrentUser();
 	      }, function (error) {
 	        console.log("登录失败");
 	      });

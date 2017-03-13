@@ -25,19 +25,36 @@ var app = new Vue({
     currentUser: null
   },
   created: function () {
-
-    window.onbeforeunload = () => {
-      let dataString = JSON.stringify(this.todoList)
-      window.localStorage.setItem('myTodos', dataString)
-    }
-
-    let oldDataString = window.localStorage.getItem('myTodos')
-    let oldData = JSON.parse(oldDataString)
-    this.todoList = oldData || []
-
     this.currentUser = this.getCurrentUser();
+    if (this.currentUser) {
+      var query = new AV.Query("AllTodos")
+      query.find()
+        .then(function(todos){
+          console.log(todos)
+        },function(err){
+          console.log(err)
+        })
+    }
   },
   methods: {
+    saveTodos: function () {
+      let dataString = JSON.stringify(this.todoList)
+      var AVTodos = AV.Object.extend('AllTodos');
+      var avTodos = new AVTodos();
+      var acl = new AV.ACL();
+      acl.setPublicReadAccess(true);
+      acl.setWriteAccess(AV.User.current(), true);
+
+      avTodos.set('content', dataString);
+      avTodos.setACL(acl); // 设置访问控制
+      avTodos.save().then(function (todo) {
+        // 成功保存之后，执行其他逻辑.
+        console.log("保存成功");
+      }, function (error) {
+        // 异常处理
+        console.error("保存失败");
+      });
+    },
     addTodo: function () {
       this.todoList.push({
         title: this.newTodo,
@@ -46,11 +63,13 @@ var app = new Vue({
       })
       //  console.log( this.todoList )
       this.newTodo = " ";
+      this.saveTodos()
     },
     removeTodo: function (todo) {
       let index = this.todoList.indexOf(todo);
       this.todoList.splice(index, 1)
       console.log(index)
+      this.saveTodos();
     },
     signUp: function () {
       var user = new AV.User();
