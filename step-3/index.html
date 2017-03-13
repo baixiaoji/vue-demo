@@ -19,12 +19,12 @@
         <label><input type="radio" name="type" v-model="actionType" value="login">登入</label>
       </div>
       <div class="signUp" v-if="actionType=='signUp' ">
-        <form>
+        <form @submit.prevent=signUp>
           <div class="formRow">
-            用户名<input type="text">
+            用户名<input type="text" v-model="formData.username">
           </div>
           <div class="formRow">
-            密码<input type="password">
+            密码<input type="password" v-model="formData.password">
           </div>
           <div class="formActions">
             <input type="submit" value="注册">
