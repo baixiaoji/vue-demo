@@ -6,6 +6,7 @@ bar();
 var app = new Vue({
   el: '#app', // 页面元素 可类和ID  但是如果类出现两次，第二次不会操作DOM上去
   data: {
+    actionType: 'signUp',
     newTodo: '',
     todoList:[]
   },
