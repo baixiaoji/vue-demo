@@ -59,6 +59,12 @@ var app = new Vue({
         console.log(loginedUser);
       }, function (error) {
       });
+    },
+    login: function () {
+      AV.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
+        console.log(loginedUser);
+      }, function (error) {
+      });
     }
   }
 })
