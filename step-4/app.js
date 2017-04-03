@@ -80,7 +80,7 @@ var app = new Vue({
     addTodo: function () {
       this.todoList.push({
         title: this.newTodo,
-        date: (new Date()).toLocaleDateString(),
+        date: (new Date()).toLocaleDateString()+" "+(new Date()).toLocaleTimeString(),
         done: false
       })
       //  console.log( this.todoList )
