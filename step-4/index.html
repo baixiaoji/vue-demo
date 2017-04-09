@@ -15,7 +15,7 @@
     
     #app {
       width: 500px;
-      margin:0 auto;
+      margin: 0 auto;
     }
     
     * {
@@ -32,11 +32,35 @@
       -moz-font-smoothing: antialiased;
       font-smoothing: antialiased;
     }
-    #signInAndSignUp{
-      width:350px;
-      height:600px;
-      margin:0 auto;
-      background: #fff;
+    
+    #signInAndSignUp {
+      width: 350px;
+      height: 600px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0 auto;
+      /*overflow: hidden;*/
+      background: #81779D;
+      background-image: url(http://i1.piimg.com/567571/581d89338f28fb15.png);
+      background-size: cover;
+
+      display: flex;
+      flex-direction:column;
+      justify-content: center;
+    }
+    #signInAndSignUp::before{
+      content:"";
+      display: block;
+      width:100%;
+      height:100%;
+      background: rgba(47,84,89,0.5);
+    }
+    .loginandSignUpWrapper{
+      position: absolute;
+      top:10px;
+      z-index: 1;
     }
     #todo h1 {
       font-size: 50px;
@@ -186,12 +210,12 @@
       border-radius: 2px;
       color: #474646;
     }
-
+    
     .instruction {
-      color:#2c2b2b;
+      color: #2c2b2b;
       font-size: 13px;
-      text-shadow: 0px 0px 1px rgba(0,0,0,0.6);
-      text-align:center;
+      text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
+      text-align: center;
     }
   </style>
 </head>
@@ -199,35 +223,37 @@
 <body>
   <div id="app">
     <section id="signInAndSignUp" v-if="!currentUser">
-      <div>
-        <label><input type="radio" name="type" v-model="actionType" value="signUp">注册</label>
-        <label><input type="radio" name="type" v-model="actionType" value="login">登入</label>
-      </div>
-      <div class="signUp" v-if="actionType ==='signUp' ">
-        <form @submit.prevent="signUp">
-          <div class="formRow">
-            用户名<input type="text" v-model="formData.username">
-          </div>
-          <div class="formRow">
-            密码<input type="password" v-model="formData.password">
-          </div>
-          <div class="formActions">
-            <input type="submit" value="注册">
-          </div>
-        </form>
-      </div>
-      <div class="login" v-if="actionType=='login'">
-        <form @submit.prevent="login">
-          <div class="formRow">
-            用户名<input type="text" v-model="formData.username">
-          </div>
-          <div class="formRow">
-            密码<input type="password" v-model="formData.password">
-          </div>
-          <div class="formActions">
-            <input type="submit" value="登入">
-          </div>
-        </form>
+      <div class="loginandSignUpWrapper">
+        <div>
+          <label><input type="radio" name="type" v-model="actionType" value="signUp">注册</label>
+          <label><input type="radio" name="type" v-model="actionType" value="login">登入</label>
+        </div>
+        <div class="signUp" v-if="actionType ==='signUp' ">
+          <form @submit.prevent="signUp">
+            <div class="formRow">
+              用户名<input type="text" v-model="formData.username">
+            </div>
+            <div class="formRow">
+              密码<input type="password" v-model="formData.password">
+            </div>
+            <div class="formActions">
+              <input type="submit" value="注册">
+            </div>
+          </form>
+        </div>
+        <div class="login" v-if="actionType=='login'">
+          <form @submit.prevent="login">
+            <div class="formRow">
+              用户名<input type="text" v-model="formData.username">
+            </div>
+            <div class="formRow">
+              密码<input type="password" v-model="formData.password">
+            </div>
+            <div class="formActions">
+              <input type="submit" value="登入">
+            </div>
+          </form>
+        </div>
       </div>
     </section>
     <section id="todo" v-if="currentUser">
