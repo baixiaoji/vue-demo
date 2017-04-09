@@ -176,13 +176,14 @@
     </section>
     <section id="todo" v-if="currentUser">
       <p><button @click="logout">登出</button></p>
-      <h1>todoList</h1>
+      <h1>todoList {{todoCount}}</h1>
       <div class="newTask">
         <input type="text" v-model="newTodo" @keypress.enter="addTodo" placeholder="开始计划今个做啥吧！">
       </div>
       <ol class="todos">
         <li v-for="todo in todoList">
           <input type="checkbox" class="toggle" v-model="todo.done"></input>
+
           <p>
             {{todo.title}}
             <span class="time">{{todo.date}}</span>
@@ -192,6 +193,9 @@
 
           <button class="remove" @click="removeTodo(todo)">X</button>
         </li>
+        <!--<li v-if="todoCount>=1">
+          {{todoCount}}
+        </li>-->
       </ol>
     </section>
   </div>

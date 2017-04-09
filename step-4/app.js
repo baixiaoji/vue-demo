@@ -24,6 +24,11 @@ var app = new Vue({
     todoList: [],
     currentUser: null
   },
+  computed: {
+    todoCount: function () {
+      return this.todoList.length;
+    }
+  },
   created: function () {
     this.currentUser = this.getCurrentUser();
     this.fetchTodos()
@@ -56,7 +61,7 @@ var app = new Vue({
       var AVTodos = AV.Object.extend('AllTodos');
       var avTodos = new AVTodos();
       var acl = new AV.ACL();
-      acl.setReadAccess(AV.User.current(),true);
+      acl.setReadAccess(AV.User.current(), true);
       acl.setWriteAccess(AV.User.current(), true);
 
       avTodos.set('content', dataString);
@@ -80,7 +85,7 @@ var app = new Vue({
     addTodo: function () {
       this.todoList.push({
         title: this.newTodo,
-        date: (new Date()).toLocaleDateString()+" "+(new Date()).toLocaleTimeString(),
+        date: (new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
         done: false
       })
       //  console.log( this.todoList )
