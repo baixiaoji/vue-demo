@@ -77,6 +77,11 @@
 	    todoList: [],
 	    currentUser: null
 	  },
+	  computed: {
+	    todoCount: function todoCount() {
+	      return this.todoList.length;
+	    }
+	  },
 	  created: function created() {
 	    this.currentUser = this.getCurrentUser();
 	    this.fetchTodos();

@@ -22,12 +22,12 @@ var app = new Vue({
     },
     newTodo: '',
     todoList: [],
-    currentUser: null
+    currentUser: null,
   },
   computed: {
-    todoCount: function () {
-      return this.todoList.length;
-    }
+     todoCount: function(){
+        return this.todoList.length
+     }
   },
   created: function () {
     this.currentUser = this.getCurrentUser();

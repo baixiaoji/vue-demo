@@ -137,6 +137,46 @@
     .todos li .toggle:checked:after {
       content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
     }
+
+    .todos li.showMsg{
+      font-size: 14px;
+      height:35px;
+      color:#808081;
+      display: flex;
+      border-radius: 0 0 5px 5px;
+      justify-content: space-between;
+      align-items: center;
+      overflow:hidden;
+    }
+    .todos li.showMsg span.todoCount{
+      /*flex:1;*/
+      margin-left:15px;
+    }
+    .todos li.showMsg span.allDelete{
+      margin-right:15px;
+      cursor:pointer;
+    }
+    
+    .todos li.showMsg ul{
+      display: flex;
+      /*flex:2;*/
+      font-size: 14px;
+      padding:0;
+      list-style: none;
+    }
+    .todos li.showMsg ul li{
+      font-size: 14px;
+      cursor: pointer;
+      margin:10px;
+      border:0;
+      padding:1px 3px;
+      
+    }
+    .todos li.showMsg ul li.active{
+      border:1px solid #fca56b;
+      border-radius:2px;
+      color:#474646;
+    }
   </style>
 </head>
 
@@ -176,7 +216,7 @@
     </section>
     <section id="todo" v-if="currentUser">
       <p><button @click="logout">登出</button></p>
-      <h1>todoList {{todoCount}}</h1>
+      <h1>todoList</h1>
       <div class="newTask">
         <input type="text" v-model="newTodo" @keypress.enter="addTodo" placeholder="开始计划今个做啥吧！">
       </div>
@@ -193,9 +233,16 @@
 
           <button class="remove" @click="removeTodo(todo)">X</button>
         </li>
-        <!--<li v-if="todoCount>=1">
-          {{todoCount}}
-        </li>-->
+        <li class="showMsg" v-if="todoCount>=1">
+          
+          <span class="todoCount">共{{todoCount}}项</span>
+          <ul>
+            <li class="active">全部</li>
+            <li>进行</li>
+            <li>完成</li>
+          </ul>
+          <span class="allDelete">全部清空</span>
+        </li>
       </ol>
     </section>
   </div>
