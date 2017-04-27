@@ -67,7 +67,7 @@ var app = new Vue({
       avTodos.set('content', dataString);
       avTodos.setACL(acl); // 设置访问控制
       avTodos.save().then((todo) => {
-        this.todoList.id = todo.is
+        this.todoList.id = todo.id
         // 成功保存之后，执行其他逻辑.
         console.log("保存成功");
       }, function (error) {
