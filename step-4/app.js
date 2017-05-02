@@ -64,7 +64,7 @@ var app = new Vue({
       acl.setReadAccess(AV.User.current(), true);
       acl.setWriteAccess(AV.User.current(), true);
 
-      avTodos.set('content', dataString);
+      avTodos.set('AllTodos', dataString);
       avTodos.setACL(acl); // 设置访问控制
       avTodos.save().then((todo) => {
         this.todoList.id = todo.id
