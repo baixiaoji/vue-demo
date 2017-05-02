@@ -120,10 +120,10 @@
 	      acl.setReadAccess(_leancloudStorage2.default.User.current(), true);
 	      acl.setWriteAccess(_leancloudStorage2.default.User.current(), true);
 
-	      avTodos.set('content', dataString);
+	      avTodos.set('AllTodos', dataString);
 	      avTodos.setACL(acl); // 设置访问控制
 	      avTodos.save().then(function (todo) {
-	        _this2.todoList.id = todo.is;
+	        _this2.todoList.id = todo.id;
 	        // 成功保存之后，执行其他逻辑.
 	        console.log("保存成功");
 	      }, function (error) {

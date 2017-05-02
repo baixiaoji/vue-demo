@@ -35,32 +35,56 @@
     
     #signInAndSignUp {
       width: 350px;
-      height: 600px;
+      height: 200px;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       margin: 0 auto;
       /*overflow: hidden;*/
-      background: #81779D;
-      background-image: url(http://i1.piimg.com/567571/581d89338f28fb15.png);
+      /*background: #81779D;*/
+      /*background-image: url(http://i1.piimg.com/567571/581d89338f28fb15.png);*/
       background-size: cover;
-
+      /*background: #fff;*/
       display: flex;
       flex-direction:column;
       justify-content: center;
+      align-items: center;
+      opacity: 1;
     }
     #signInAndSignUp::before{
       content:"";
       display: block;
       width:100%;
       height:100%;
-      background: rgba(47,84,89,0.5);
+      background: rgba(255,255,255,0.9);
     }
     .loginandSignUpWrapper{
       position: absolute;
-      top:10px;
-      z-index: 1;
+      /*top:10px;*/
+      /*z-index: 1;*/
+    }
+    .loginandSignUpWrapper>div:first-child{
+      margin-top:-15px;
+      margin-bottom:10px;
+    }
+    .formRow{
+      padding:.6em 0;
+    }
+    .formRow>label{
+      width:3em;
+      display: inline-block;
+    }
+    .formRow>input{
+      margin-left: 0.5em;
+    }
+    .formActions> input{
+      border: none;
+      background: #333;
+      color: #fff;
+      padding: .5em .8em;
+      outline: none;
+      cursor: pointer;
     }
     #todo h1 {
       font-size: 50px;
@@ -68,7 +92,19 @@
       color: rgba(64, 63, 63, 0.8);
       text-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
     }
-    
+    #todo>p>button{
+      border:0;
+      outline:none;
+      cursor:pointer;
+      background:#dc1010;
+      color:#fff;
+      font-size: 14px;
+      padding:4px 5px;
+      transition:all .4s ease-in-out;
+    }
+     #todo>p>button:hover{
+       background: #ab0b0b;
+     }
     .newTask input {
       width: 100%;
       height: 34px;
@@ -231,10 +267,10 @@
         <div class="signUp" v-if="actionType ==='signUp' ">
           <form @submit.prevent="signUp">
             <div class="formRow">
-              用户名<input type="text" v-model="formData.username">
+              <label>用户名</label><input type="text" v-model="formData.username">
             </div>
             <div class="formRow">
-              密码<input type="password" v-model="formData.password">
+              <label >密码</label><input type="password" v-model="formData.password">
             </div>
             <div class="formActions">
               <input type="submit" value="注册">
@@ -244,10 +280,10 @@
         <div class="login" v-if="actionType=='login'">
           <form @submit.prevent="login">
             <div class="formRow">
-              用户名<input type="text" v-model="formData.username">
+              <label>用户名</label><input type="text" v-model="formData.username">
             </div>
             <div class="formRow">
-              密码<input type="password" v-model="formData.password">
+              <label >密码</label><input type="password" v-model="formData.password">
             </div>
             <div class="formActions">
               <input type="submit" value="登入">
