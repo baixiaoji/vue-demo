@@ -27,6 +27,9 @@ var app = new Vue({
   computed: {
      todoCount: function(){
         return this.todoList.length
+     },
+     allTodo: function(){
+       return this.todoList
      }
   },
   created: function () {
@@ -94,8 +97,7 @@ var app = new Vue({
     },
     removeTodo: function (todo) {
       let index = this.todoList.indexOf(todo);
-      this.todoList.splice(index, 1)
-      console.log(index)
+      let removeTodo = this.todoList.splice(index, 1)
       this.saveOrUpdateTodos();
     },
     signUp: function () {
@@ -131,6 +133,24 @@ var app = new Vue({
       AV.User.logOut();
       this.currentUser = null
       window.location.reload()
+    },
+    showDoing: function(e){
+      
+    },
+    showFinish: function(e){
+      let li = e.target
+      let lis = li.parentElement.children;
+      
+      for(let i = 0; i<lis.length; i++){
+        lis[i].classList.remove("active")
+      }
+      if(!li.className.match("active")){
+          li.classList.add("active")
+      }
+      console.log(this.todoList)
+      let finishTodo = this.todoList.filter((todo)=>todo.done===true)
+      console.log(finishTodo)
+      this.todoList = finishTodo
     }
   }
 })

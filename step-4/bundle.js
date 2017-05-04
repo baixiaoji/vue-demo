@@ -80,6 +80,9 @@
 	  computed: {
 	    todoCount: function todoCount() {
 	      return this.todoList.length;
+	    },
+	    allTodo: function allTodo() {
+	      return this.todoList;
 	    }
 	  },
 	  created: function created() {
@@ -150,8 +153,7 @@
 	    },
 	    removeTodo: function removeTodo(todo) {
 	      var index = this.todoList.indexOf(todo);
-	      this.todoList.splice(index, 1);
-	      console.log(index);
+	      var removeTodo = this.todoList.splice(index, 1);
 	      this.saveOrUpdateTodos();
 	    },
 	    signUp: function signUp() {
@@ -195,6 +197,24 @@
 	      _leancloudStorage2.default.User.logOut();
 	      this.currentUser = null;
 	      window.location.reload();
+	    },
+	    showDoing: function showDoing(e) {},
+	    showFinish: function showFinish(e) {
+	      var li = e.target;
+	      var lis = li.parentElement.children;
+
+	      for (var i = 0; i < lis.length; i++) {
+	        lis[i].classList.remove("active");
+	      }
+	      if (!li.className.match("active")) {
+	        li.classList.add("active");
+	      }
+	      console.log(this.todoList);
+	      var finishTodo = this.todoList.filter(function (todo) {
+	        return todo.done === true;
+	      });
+	      console.log(finishTodo);
+	      this.todoList = finishTodo;
 	    }
 	  }
 	});

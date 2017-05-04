@@ -58,6 +58,7 @@
       width:100%;
       height:100%;
       background: rgba(255,255,255,0.9);
+      border:1px solid 
     }
     .loginandSignUpWrapper{
       position: absolute;
@@ -300,8 +301,7 @@
       </div>
       <ol class="todos">
         <li v-for="todo in todoList">
-          <input type="checkbox" class="toggle" v-model="todo.done"></input>
-
+          <input type="checkbox" class="toggle" @click="todo.done = true"></input>
           <p>
             {{todo.title}}
             <span class="time">{{todo.date}}</span>
@@ -316,8 +316,8 @@
           <span class="todoCount">共{{todoCount}}项</span>
           <ul>
             <li class="active">全部</li>
-            <li>进行</li>
-            <li>完成</li>
+            <li @click="showDoing">进行</li>
+            <li @click="showFinish">完成</li>
           </ul>
           <span class="allDelete">全部清空</span>
         </li>
