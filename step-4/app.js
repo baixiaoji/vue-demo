@@ -145,7 +145,7 @@ var app = new Vue({
       this.todoList = this.allTodo
     },
     showDoing: function(e){
-      let doingTodo = this.todoList.filter((todo)=>todo.done===false)
+      let doingTodo = this.allTodo.filter((todo)=>todo.done===false)
       if(doingTodo.length > 1){
           this.todoList = doingTodo
       }else{
@@ -159,7 +159,7 @@ var app = new Vue({
       this.addClass(li)
     },
     showFinish: function(e){
-      let finishTodo = this.todoList.filter((todo)=>todo.done===true)
+      let finishTodo = this.allTodo.filter((todo)=>todo.done===true)
       if(finishTodo.length > 1){
           this.todoList = finishTodo
       }else{

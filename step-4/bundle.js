@@ -206,7 +206,7 @@
 	      this.todoList = this.allTodo;
 	    },
 	    showDoing: function showDoing(e) {
-	      var doingTodo = this.todoList.filter(function (todo) {
+	      var doingTodo = this.allTodo.filter(function (todo) {
 	        return todo.done === false;
 	      });
 	      if (doingTodo.length > 1) {
@@ -222,7 +222,7 @@
 	      this.addClass(li);
 	    },
 	    showFinish: function showFinish(e) {
-	      var finishTodo = this.todoList.filter(function (todo) {
+	      var finishTodo = this.allTodo.filter(function (todo) {
 	        return todo.done === true;
 	      });
 	      if (finishTodo.length > 1) {
