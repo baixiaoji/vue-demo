@@ -22,14 +22,12 @@ var app = new Vue({
     },
     newTodo: '',
     todoList: [],
+    allTodo:[],
     currentUser: null,
   },
   computed: {
      todoCount: function(){
         return this.todoList.length
-     },
-     allTodo: function(){
-       return this.todoList
      }
   },
   created: function () {
@@ -44,12 +42,16 @@ var app = new Vue({
           .then((todos) => {
             let avAllTodos = todos[0]
             let id = avAllTodos.id
-            this.todoList = JSON.parse(avAllTodos.attributes.content)
+            //
+            this.allTodo = this.todoList = JSON.parse(avAllTodos.attributes.content)
             this.todoList.id = id;
+
           }, function (err) {
             console.log(err)
           })
       }
+
+      
     },
     updateTodos: function () {
       let dataString = JSON.stringify(this.todoList)
@@ -134,23 +136,51 @@ var app = new Vue({
       this.currentUser = null
       window.location.reload()
     },
-    showDoing: function(e){
-      
-    },
-    showFinish: function(e){
+    showAll: function(e){
       let li = e.target
       let lis = li.parentElement.children;
-      
-      for(let i = 0; i<lis.length; i++){
-        lis[i].classList.remove("active")
+      this.removeClass(lis)
+      this.addClass(li)
+
+      this.todoList = this.allTodo
+    },
+    showDoing: function(e){
+      let doingTodo = this.todoList.filter((todo)=>todo.done===false)
+      if(doingTodo.length > 1){
+          this.todoList = doingTodo
+      }else{
+        alert("没有进行的")
+        return
       }
+      
+      let li = e.target
+      let lis = li.parentElement.children;
+      this.removeClass(lis)
+      this.addClass(li)
+    },
+    showFinish: function(e){
+      let finishTodo = this.todoList.filter((todo)=>todo.done===true)
+      if(finishTodo.length > 1){
+          this.todoList = finishTodo
+      }else{
+        alert("没有完成的")
+        return
+      }
+
+      let li = e.target
+      let lis = li.parentElement.children;
+      this.removeClass(lis)
+      this.addClass(li)
+    },
+    addClass(li){
       if(!li.className.match("active")){
           li.classList.add("active")
       }
-      console.log(this.todoList)
-      let finishTodo = this.todoList.filter((todo)=>todo.done===true)
-      console.log(finishTodo)
-      this.todoList = finishTodo
+    },
+    removeClass(arr){
+      for(let i = 0; i<arr.length; i++){
+        arr[i].classList.remove("active")
+      }
     }
   }
 })

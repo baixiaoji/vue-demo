@@ -315,7 +315,7 @@
 
           <span class="todoCount">共{{todoCount}}项</span>
           <ul>
-            <li class="active">全部</li>
+            <li class="active" @click="showAll">全部</li>
             <li @click="showDoing">进行</li>
             <li @click="showFinish">完成</li>
           </ul>

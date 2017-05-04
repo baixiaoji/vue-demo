@@ -75,14 +75,12 @@
 	    },
 	    newTodo: '',
 	    todoList: [],
+	    allTodo: [],
 	    currentUser: null
 	  },
 	  computed: {
 	    todoCount: function todoCount() {
 	      return this.todoList.length;
-	    },
-	    allTodo: function allTodo() {
-	      return this.todoList;
 	    }
 	  },
 	  created: function created() {
@@ -98,7 +96,8 @@
 	        query.find().then(function (todos) {
 	          var avAllTodos = todos[0];
 	          var id = avAllTodos.id;
-	          _this.todoList = JSON.parse(avAllTodos.attributes.content);
+	          //
+	          _this.allTodo = _this.todoList = JSON.parse(avAllTodos.attributes.content);
 	          _this.todoList.id = id;
 	        }, function (err) {
 	          console.log(err);
@@ -198,23 +197,55 @@
 	      this.currentUser = null;
 	      window.location.reload();
 	    },
-	    showDoing: function showDoing(e) {},
-	    showFinish: function showFinish(e) {
+	    showAll: function showAll(e) {
 	      var li = e.target;
 	      var lis = li.parentElement.children;
+	      this.removeClass(lis);
+	      this.addClass(li);
 
-	      for (var i = 0; i < lis.length; i++) {
-	        lis[i].classList.remove("active");
+	      this.todoList = this.allTodo;
+	    },
+	    showDoing: function showDoing(e) {
+	      var doingTodo = this.todoList.filter(function (todo) {
+	        return todo.done === false;
+	      });
+	      if (doingTodo.length > 1) {
+	        this.todoList = doingTodo;
+	      } else {
+	        alert("没有进行的");
+	        return;
 	      }
-	      if (!li.className.match("active")) {
-	        li.classList.add("active");
-	      }
-	      console.log(this.todoList);
+
+	      var li = e.target;
+	      var lis = li.parentElement.children;
+	      this.removeClass(lis);
+	      this.addClass(li);
+	    },
+	    showFinish: function showFinish(e) {
 	      var finishTodo = this.todoList.filter(function (todo) {
 	        return todo.done === true;
 	      });
-	      console.log(finishTodo);
-	      this.todoList = finishTodo;
+	      if (finishTodo.length > 1) {
+	        this.todoList = finishTodo;
+	      } else {
+	        alert("没有完成的");
+	        return;
+	      }
+
+	      var li = e.target;
+	      var lis = li.parentElement.children;
+	      this.removeClass(lis);
+	      this.addClass(li);
+	    },
+	    addClass: function addClass(li) {
+	      if (!li.className.match("active")) {
+	        li.classList.add("active");
+	      }
+	    },
+	    removeClass: function removeClass(arr) {
+	      for (var i = 0; i < arr.length; i++) {
+	        arr[i].classList.remove("active");
+	      }
 	    }
 	  }
 	});
