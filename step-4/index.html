@@ -301,7 +301,12 @@
       </div>
       <ol class="todos">
         <li v-for="todo in todoList">
-          <input type="checkbox" class="toggle" @click="todo.done = true"></input>
+          <span v-if="todo.done === true">
+            <input type="checkbox" class="toggle" @click="finish(todo)" checked></input>
+          </span>
+          <span v-else>
+            <input type="checkbox" class="toggle" @click="finish(todo)"></input>
+          </span>
           <p>
             {{todo.title}}
             <span class="time">{{todo.date}}</span>

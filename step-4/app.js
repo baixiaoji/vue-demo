@@ -136,6 +136,11 @@ var app = new Vue({
       this.currentUser = null
       window.location.reload()
     },
+    finish: function(todo){
+      todo.done = true;
+      this.allTodo = this.todoList
+      // this.saveOrUpdateTodos();
+    },
     showAll: function(e){
       let li = e.target
       let lis = li.parentElement.children;
@@ -145,8 +150,8 @@ var app = new Vue({
       this.todoList = this.allTodo
     },
     showDoing: function(e){
-      let doingTodo = this.allTodo.filter((todo)=>todo.done===false)
-      if(doingTodo.length > 1){
+      let doingTodo = this.todoList.filter((todo)=>todo.done===false) || this.allTodo.filter((todo)=>todo.done===false)
+      if(doingTodo.length > 0){
           this.todoList = doingTodo
       }else{
         alert("没有进行的")
@@ -159,8 +164,10 @@ var app = new Vue({
       this.addClass(li)
     },
     showFinish: function(e){
-      let finishTodo = this.allTodo.filter((todo)=>todo.done===true)
-      if(finishTodo.length > 1){
+      // 这里判断要根据length判断  因为空数组也是true
+      let finishTodo = this.todoList.filter((todo)=>todo.done===true) || this.allTodo.filter((todo)=>todo.done===true)
+      console.log(finishTodo)
+      if(finishTodo.length > 0){
           this.todoList = finishTodo
       }else{
         alert("没有完成的")

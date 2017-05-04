@@ -197,6 +197,11 @@
 	      this.currentUser = null;
 	      window.location.reload();
 	    },
+	    finish: function finish(todo) {
+	      todo.done = true;
+	      this.allTodo = this.todoList;
+	      // this.saveOrUpdateTodos();
+	    },
 	    showAll: function showAll(e) {
 	      var li = e.target;
 	      var lis = li.parentElement.children;
@@ -206,10 +211,12 @@
 	      this.todoList = this.allTodo;
 	    },
 	    showDoing: function showDoing(e) {
-	      var doingTodo = this.allTodo.filter(function (todo) {
+	      var doingTodo = this.todoList.filter(function (todo) {
+	        return todo.done === false;
+	      }) || this.allTodo.filter(function (todo) {
 	        return todo.done === false;
 	      });
-	      if (doingTodo.length > 1) {
+	      if (doingTodo.length > 0) {
 	        this.todoList = doingTodo;
 	      } else {
 	        alert("没有进行的");
@@ -222,10 +229,14 @@
 	      this.addClass(li);
 	    },
 	    showFinish: function showFinish(e) {
-	      var finishTodo = this.allTodo.filter(function (todo) {
+	      // 这里判断要根据length判断  因为空数组也是true
+	      var finishTodo = this.todoList.filter(function (todo) {
+	        return todo.done === true;
+	      }) || this.allTodo.filter(function (todo) {
 	        return todo.done === true;
 	      });
-	      if (finishTodo.length > 1) {
+	      console.log(finishTodo);
+	      if (finishTodo.length > 0) {
 	        this.todoList = finishTodo;
 	      } else {
 	        alert("没有完成的");
